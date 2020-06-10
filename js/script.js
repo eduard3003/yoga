@@ -5,7 +5,19 @@ window.addEventListener('DOMContentLoaded', function () {
     // Табы:
     let tab = document.querySelectorAll('.info-header-tab'),
         info = document.querySelector('.info-header'),
-        tabContent = document.querySelectorAll('.info-tabcontent');
+        tabContent = document.querySelectorAll('.info-tabcontent'),
+        btn = document.querySelectorAll('.description-btn');
+
+
+    btn.forEach((element, i) => { // Используем метод forEach для перебора кнопок "Подробнее"
+
+        btn[i].addEventListener('click', () => {
+            overlay.style.display = 'block';
+            more.classList.add('more-splash');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
 
     function hideTabContent(a) {
         for (let i = a; i < tabContent.length; i++) {
@@ -36,7 +48,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // Timer:
 
-    let deadline = '2020-06-02'; // задаем конечную дату
+    let deadline = '2020-06-14'; // задаем конечную дату
     function getTimeRemaning(endtime) {
         let t = Date.parse(endtime) - Date.parse(new Date()), //узнаем промежуток времени между сейчас и дедлайном(конечной датой)
             seconds = Math.floor((t / 1000) % 60), // получаем секунды,
@@ -96,4 +108,24 @@ window.addEventListener('DOMContentLoaded', function () {
     //где 'timer'- индетификатор элемента,
     //deadline - переменная,которую назначили в самом начале; 
 
+
+    // Модальное окно
+
+    let more = document.querySelector('.more'),
+        overlay = document.querySelector('.overlay'),
+        close = document.querySelector('.popup-close');
+
+
+
+
+    more.addEventListener('click', function () {
+        overlay.style.display = 'block';
+        this.classList.add('more-splash');
+        document.body.style.overflow = 'hidden'; //Запрещаем прокрутку страницы как только открывается модальное окно
+    });
+    close.addEventListener('click', function () {
+        overlay.style.display = 'none';
+        more.classList.remove('more-splash');
+        document.body.style.overflow = ''; //Разрешаем прокрутку страницы как только закрывается модальное окно
+    });
 });
