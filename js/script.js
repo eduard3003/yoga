@@ -33,7 +33,7 @@ window.addEventListener('DOMContentLoaded', function () {
             tabContent[b].classList.add('show');
         }
     }
-    info.addEventListener('click', function (event) {
+    info.addEventListener('click',  (event) => {
         let target = event.target;
         if (target && target.classList.contains('info-header-tab')) {
             for (let i = 0; i < tab.length; i++) {
@@ -48,7 +48,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     // Timer:
 
-    let deadline = '2020-06-14'; // задаем конечную дату
+    let deadline = '2020-06-18'; // задаем конечную дату
     function getTimeRemaning(endtime) {
         let t = Date.parse(endtime) - Date.parse(new Date()), //узнаем промежуток времени между сейчас и дедлайном(конечной датой)
             seconds = Math.floor((t / 1000) % 60), // получаем секунды,
@@ -118,14 +118,15 @@ window.addEventListener('DOMContentLoaded', function () {
 
 
 
-    more.addEventListener('click', function () {
+    more.addEventListener('click',() => {
         overlay.style.display = 'block';
         this.classList.add('more-splash');
         document.body.style.overflow = 'hidden'; //Запрещаем прокрутку страницы как только открывается модальное окно
     });
-    close.addEventListener('click', function () {
+    close.addEventListener('click', () => {
         overlay.style.display = 'none';
         more.classList.remove('more-splash');
         document.body.style.overflow = ''; //Разрешаем прокрутку страницы как только закрывается модальное окно
     });
+   
 });
