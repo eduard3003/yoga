@@ -48,7 +48,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
 	// Timer:
 
-	let deadline = '2020-06-18'; // задаем конечную дату
+	let deadline = '2020-07-1'; // задаем конечную дату
 	function getTimeRemaning(endtime) {
 		let t = Date.parse(endtime) - Date.parse(new Date()), //узнаем промежуток времени между сейчас и дедлайном(конечной датой)
 			seconds = Math.floor((t / 1000) % 60), // получаем секунды,
@@ -271,4 +271,48 @@ window.addEventListener('DOMContentLoaded', function () {
 			}
 		}
 	});
+
+	// Calc
+
+	let persons = document.querySelectorAll('.counter-block-input')[0],
+		restDays = document.querySelectorAll('.counter-block-input')[1],
+		place = document.getElementById('select'),
+		totalValue = document.getElementById('total'),
+		personsSum = 0,
+		daySum = 0,
+		total = 0;
+
+	totalValue.innerHTML = 0; //totalValue.textContent = 0;- можно и так записать
+
+	persons.addEventListener('change', function () {
+		personsSum = +this.value; // получаем value на input на котором происходит событие с помощью this
+		total = (daySum + personsSum) * 4000;
+		if (restDays.value == '' || persons.value == '') {
+			totalValue.innerHTML = 0;
+		} else {
+			totalValue.innerHTML = total;
+		}
+	});
+
+	restDays.addEventListener('change', function () {
+		daySum  = +this.value; // получаем value на input на котором происходит событие с помощью this
+		total = (daySum + personsSum) * 4000;
+		if (persons.value == '' || restDays.value =='') {
+			totalValue.innerHTML = 0;
+		} else {
+			totalValue.innerHTML = total;
+		}
+	});
+
+	place.addEventListener('change',function(){
+		if (restDays.value == '' || persons.value == '') {
+			totalValue.innerHTML = 0;
+		}else {
+			let a = total; //создаем промежуточную переменную a
+			totalValue.innerHTML = a * this.options[this.selectedIndex].value;
+		}
+
+	});
+
+
 });
